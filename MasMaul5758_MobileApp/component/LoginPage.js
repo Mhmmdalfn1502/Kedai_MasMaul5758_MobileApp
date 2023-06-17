@@ -1,48 +1,96 @@
 import React, { useState } from "react";
-import { Image, Text, View, StyleSheet, TouchableOpacity, TextInput, Alert } from "react-native";
+import { Image, Text, View, StyleSheet, TouchableOpacity, TextInput, Alert, Platform, Pressable } from "react-native";
+import { FlatList } from "react-native";
+import { KeyboardAvoidingView } from "react-native";
+import { ScrollView } from "react-native";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 // D9D9D9
 // F5D247
 // F2B040
 
-const LoginPage = () => {
-  const handleButtonPress = () => {
-    console.log("Tombol ditekan!");
+const LoginPage = ({ navigation }) => {
+  const [code, setCode] = useState("");
+  const [password, setPassword] = useState("");
+  const [isOpenPass, setOpenPass] = useState(true);
+  const [validCode, setValidCode] = useState("");
+
+  const handlerValidCode = (value) => {
+    if (value) {
+      setValidCode("");
+    } else {
+      setValidCode("This field is required");
+    }
   };
 
-  const [otp, setOTP] = useState("");
+  const checkPasswordValidity = (value) => {};
+  const handleLogin = () => {
+    const checkPassword = checkPasswordValidity(password);
+    if (!checkPassword) {
+      alert("succes login");
+    } else {
+      alert(checkPassword);
+    }
+  };
 
-  const handleOTPChange = (text) => {
-    setOTP(text);
+  const handlerOpenPassword = () => {
+    switch (!isOpenPass) {
+      case true:
+        setOpenPass(true);
+        break;
+      default:
+        setOpenPass(false);
+        break;
+    }
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.LogoFrame}>
-        <Image source={require("../assets/Kedai.png")} style={styles.Logo} />
-      </View>
-      <View style={styles.PinFrame}>
-        <Text style={styles.PinText}>PinCode</Text>
-        <View style={styles.InputPin}>
-          <TextInput style={styles.Pin} onChangeText={handleOTPChange} value={otp} keyboardType="numeric" maxLength={1} />
-          <TextInput style={styles.Pin} onChangeText={handleOTPChange} value={otp} keyboardType="numeric" maxLength={1} />
-          <TextInput style={styles.Pin} onChangeText={handleOTPChange} value={otp} keyboardType="numeric" maxLength={1} />
-          <TextInput style={styles.Pin} onChangeText={handleOTPChange} value={otp} keyboardType="numeric" maxLength={1} />
-        </View>
-        <View style={styles.ButtonFrame}>
-          <TouchableOpacity style={styles.button} onPress={handleButtonPress}>
-            <Text style={styles.buttonText}>Verifikasi</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-      <View style={styles.Footer}>
-        <View style={{ backgroundColor: "#D9D9D9", width: "width", height: 120, flexDirection: "column-reverse" }}>
-          <View style={{ backgroundColor: "#F5D247", width: "width", height: 100, flexDirection: "column-reverse" }}>
-            <View style={{ backgroundColor: "#F2B040", width: "width", height: 80, flexDirection: "column-reverse" }}></View>
+    <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === "ios" ? "padding" : "height"}>
+      <ScrollView contentContainerStyle={{ flex: 1 }} bounces={false}>
+        <View style={styles.container}>
+          <View style={styles.LogoFrame}>
+            <Image source={require("../assets/Kedai.png")} style={styles.Logo} />
           </View>
+          <View style={styles.Login}>
+            <View>
+              <Text style={{ fontSize: 25, fontWeight: "bold", marginVertical: 20 }}>Login</Text>
+            </View>
+            <View style={styles.frm_row}>
+              <TextInput style={styles.input} placeholder="Input Code" autoCorrect={false} autoCapitalize="none" defaultValue={code} onChangeText={(text) => handlerValidCode(text)} />
+              <Text style={{ color: "red", marginTop: 5 }}>{validCode}</Text>
+            </View>
+            <View style={{ ...styles.frm_row, flexDirection: "row" }}>
+              <TextInput
+                style={{ ...styles.input, borderRightWidth: 0, width: 250, borderTopRightRadius: 0, borderBottomRightRadius: 0 }}
+                secureTextEntry={isOpenPass}
+                placeholder="Password"
+                onChangeText={(text) => setPassword(text)}
+                value={password}
+              />
+              <Pressable
+                onPress={() => handlerOpenPassword()}
+                style={{ alignItems: "center", justifyContent: "center", padding: 10, borderWidth: 1, borderBottomRightRadius: 5, borderTopRightRadius: 5, borderColor: "grey", borderLeftWidth: 0 }}
+              >
+                <FontAwesome5 name={isOpenPass ? "eye" : "eye-slash"} size={25} color="#F2B040" />
+              </Pressable>
+            </View>
+            <TouchableOpacity style={styles.button} onPress={handleLogin}>
+              <Text style={styles.buttonText}>Login</Text>
+            </TouchableOpacity>
+          </View>
+
+          {/* FOOTER */}
+          <View style={styles.Footer}>
+            <View style={{ backgroundColor: "#D9D9D9", width: "width", height: 120, flexDirection: "column-reverse" }}>
+              <View style={{ backgroundColor: "#F5D247", width: "width", height: 100, flexDirection: "column-reverse" }}>
+                <View style={{ backgroundColor: "#F2B040", width: "width", height: 80, flexDirection: "column-reverse" }}></View>
+              </View>
+            </View>
+          </View>
+          {/* FOOTER */}
         </View>
-      </View>
-    </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -61,37 +109,9 @@ const styles = StyleSheet.create({
     width: 180,
     height: 180,
   },
-  PinFrame: {
+  Login: {
     flex: 3,
-    backgroundColor: "white",
-    alignItems: "center",
-    flexDirection: "column",
-  },
-  PinText: {
-    fontWeight: "bold",
-    fontSize: 20,
-    marginTop: 20,
-  },
-  InputPin: {
-    flexDirection: "row",
-    marginTop: 30,
-  },
-  Pin: {
-    marginHorizontal: 8,
-    width: 50,
-    height: 50,
-    backgroundColor: "white",
-    borderColor: "black",
-    textAlign: "center",
-    fontSize: 30,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
+    alignItems: "center ",
   },
   button: {
     backgroundColor: "orange",
@@ -106,6 +126,19 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontWeight: "bold",
     fontFamily: "josefin sans",
+  },
+  frm_row: { marginBottom: 5 },
+  text_label: {
+    fontWeight: "bold",
+    fontSize: 16,
+  },
+  input: {
+    width: 300,
+    padding: 12,
+    borderWidth: 1,
+    borderColor: "grey",
+    borderRadius: 4,
+    borderWidth: 1,
   },
   Footer: {
     flex: 1,

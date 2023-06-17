@@ -9,39 +9,21 @@ import Icon from "react-native-vector-icons/FontAwesome";
 // F5D247
 // F2B040
 
-const ProductNasiAyam = [
-  { id: 1, Image: require("../assets/Food/NasiAyam.png"), name: "Tahu", harga: "Rp 2.000" },
-  { id: 2, Image: require("../assets/Food/NasiAyam.png"), name: "Tempe", harga: "Rp 2.000" },
-  { id: 3, Image: require("../assets/Food/NasiAyam.png"), name: "Nasi", harga: "Rp 5.000" },
-  { id: 4, Image: require("../assets/Food/NasiAyam.png"), name: "Tempe Mendoan", harga: "Rp 10.000" },
-  { id: 5, Image: require("../assets/Food/NasiAyam.png"), name: "Ayam Serundeng", harga: "Rp 10.000" },
-  { id: 6, Image: require("../assets/Food/NasiAyam.png"), name: "Nasi Ayam Serundeng", harga: "Rp 16.000" },
-  { id: 7, Image: require("../assets/Food/NasiAyam.png"), name: "Paket Nasi Ayam", harga: "Rp 18.000" },
-  { id: 8, Image: require("../assets/Food/NasiAyam.png"), name: "Nasi Ayam Pok-pok Telur", harga: "Rp 20.000" },
+const ProductPisang = [
+  { id: 1, Image: require("../assets/Snack/Pisang.jpg"), name: "Pisang Original", harga: "Rp 10.000" },
+  { id: 2, Image: require("../assets/Snack/Pisang.jpg"), name: "Pisang Keju Susu", harga: "Rp 10.000" },
+  { id: 3, Image: require("../assets/Snack/Pisang.jpg"), name: "Pisang Susu Cokelat", harga: "Rp 10.000" },
+  { id: 4, Image: require("../assets/Snack/Pisang.jpg"), name: "Pisang Susu Oreo", harga: "Rp 10.000" },
+  { id: 5, Image: require("../assets/Snack/Pisang.jpg"), name: "Pisang Susu Matcha", harga: "Rp 10.000" },
+  { id: 6, Image: require("../assets/Snack/Pisang.jpg"), name: "Pisang Susu Tiramisu", harga: "Rp 13.000" },
+  { id: 7, Image: require("../assets/Snack/Pisang.jpg"), name: "Pisang Keju Susu Cokelat", harga: "Rp 13.000" },
+  { id: 8, Image: require("../assets/Snack/Pisang.jpg"), name: "Pisang Keju Susu Oreo", harga: "Rp 13.000" },
+  { id: 9, Image: require("../assets/Snack/Pisang.jpg"), name: "Pisang Keju Susu Matcha", harga: "Rp 13.000" },
+  { id: 10, Image: require("../assets/Snack/Pisang.jpg"), name: "Pisang Keju Susu Tiramisu", harga: "Rp 15.000" },
+  { id: 11, Image: require("../assets/Snack/Pisang.jpg"), name: "Choco Banana Crispy", harga: "Rp 10.000" },
 ];
 
-const ProductIndomie = [
-  { id: 1, Image: require("../assets/Food/Mie.png"), name: "Indomie Biasa", harga: "Rp 7.000" },
-  { id: 2, Image: require("../assets/Food/Mie.png"), name: "Indomie Telur", harga: "Rp 10.000" },
-  { id: 3, Image: require("../assets/Food/Mie.png"), name: "Indomie Telur Keju", harga: "Rp 13.000" },
-  { id: 4, Image: require("../assets/Food/Mie.png"), name: "Indomie Telur Kornet", harga: "Rp 15.000" },
-  { id: 5, Image: require("../assets/Food/Mie.png"), name: "Indomie Telur Kornet Keju", harga: "Rp 17.000" },
-  { id: 6, Image: require("../assets/Food/Mie.png"), name: "Indomie Spesial", harga: "Rp 20.000" },
-  { id: 7, Image: require("../assets/Food/Mie.png"), name: "Mie Nyemek", harga: "Rp 15.000" },
-];
-
-const ProductBaru = [
-  { id: 1, Image: require("../assets/food1.png"), name: "Nasi Goreng", harga: "Rp 15.000" },
-  { id: 2, Image: require("../assets/food1.png"), name: "Seblak", harga: "Rp 15.000" },
-  { id: 3, Image: require("../assets/food1.png"), name: "Kue Cubit", harga: "Rp 10.000" },
-  { id: 4, Image: require("../assets/food1.png"), name: "Sambal Ceker", harga: "Rp 15.000" },
-  { id: 5, Image: require("../assets/food1.png"), name: "Pentol Kuah", harga: "Rp 15.000" },
-  { id: 6, Image: require("../assets/food1.png"), name: "Okonomiyaki", harga: "Rp 13.000" },
-  { id: 7, Image: require("../assets/food1.png"), name: "Omlet Korea", harga: "Rp 13.000" },
-  { id: 8, Image: require("../assets/food1.png"), name: "Bakso Solo isi Daging", harga: "Rp 15.000" },
-];
-
-const FoodPage = ({ item, navigation }) => {
+const SnackPage = ({ item }) => {
   const handleBackPress = () => {
     // Implementasikan logika untuk menangani tombol kembali
     console.log("Tombol Kembali Ditekan");
@@ -82,31 +64,21 @@ const FoodPage = ({ item, navigation }) => {
         </View>
         <View style={styles.OpsiList}>
           <TouchableOpacity style={styles.Button1}>
-            <Text style={{ ...styles.TextOpsi, color: "black" }}>Food</Text>
+            <Text style={styles.TextOpsi}>Food</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.Button1}>
             <Text style={styles.TextOpsi}>Drink</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.Button1}>
-            <Text style={styles.TextOpsi}>Snack</Text>
+            <Text style={{ ...styles.TextOpsi, color: "black" }}>Snack</Text>
           </TouchableOpacity>
         </View>
       </View>
 
       <View style={styles.MenuList}>
-        <Text style={styles.JudulMenu}>Paket Nasi Ayam</Text>
+        <Text style={styles.JudulMenu}>Paket Pisang</Text>
         <View style={styles.Food}>
-          <FlatList data={ProductNasiAyam} keyExtractor={(item) => item.id} renderItem={renderProductItem} />
-        </View>
-
-        <Text style={styles.JudulMenu}>Paket Indomie</Text>
-        <View style={styles.Food}>
-          <FlatList data={ProductIndomie} keyExtractor={(item) => item.id} renderItem={renderProductItem} />
-        </View>
-
-        <Text style={styles.JudulMenu}>Menu Baru</Text>
-        <View style={styles.Food}>
-          <FlatList data={ProductBaru} keyExtractor={(item) => item.id} renderItem={renderProductItem} />
+          <FlatList data={ProductPisang} keyExtractor={(item) => item.id} renderItem={renderProductItem} />
         </View>
       </View>
     </View>
@@ -154,9 +126,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 30,
     marginVertical: 20,
     color: "#F2B040",
-  },
-  TextOpsiKlik: {
-    color: "black",
   },
   MenuList: {
     flex: 7,
@@ -209,4 +178,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FoodPage;
+export default SnackPage;

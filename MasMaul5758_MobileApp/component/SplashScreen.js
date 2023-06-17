@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, Image, View, StyleSheet, TouchableOpacity } from "react-native";
 
-const HomePage = () => {
+const SplashScreen = ({ navigation }) => {
   const handleButtonPress = () => {
     console.log("Tombol ditekan!");
   };
@@ -54,4 +54,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomePage;
+export default SplashScreen;
