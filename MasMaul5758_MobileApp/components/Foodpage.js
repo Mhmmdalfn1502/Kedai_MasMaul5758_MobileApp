@@ -53,7 +53,7 @@ export default function Foodpage() {
   };
 
   const handleOrder = () => {
-    navigation.navigate('Payment');
+    navigation.navigate('PaymentTf', { totalAmount: totalPrice });
   };
 
   const renderProductItem = ({ item }) => {
@@ -69,6 +69,9 @@ export default function Foodpage() {
           </View>
           <View style={styles.quantityContainer}>
             <View style={styles.buttonContainer}>
+            <TouchableOpacity onPress={() => handleReset(item.id)}>
+                <Icon name="trash" size={20} color="red" style={styles.trashButton} />
+              </TouchableOpacity>
               <TouchableOpacity onPress={() => handleMinus(item.id)}>
                 <Icon name="minus-circle" size={20} color="red" />
               </TouchableOpacity>
@@ -76,9 +79,7 @@ export default function Foodpage() {
               <TouchableOpacity onPress={() => handlePlus(item.id)}>
                 <Icon name="plus-circle" size={20} color="green" style={styles.plusButton} />
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => handleReset(item.id)}>
-                <Icon name="trash" size={20} color="red" style={styles.trashButton} />
-              </TouchableOpacity>
+             
             </View>
           </View>
         </View>
@@ -87,7 +88,7 @@ export default function Foodpage() {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.header}>
         <Icon name="angle-left" size={30} color="#000" style={styles.backIcon} />
         <Text style={styles.title}>SHOPPING CART</Text>
@@ -110,12 +111,13 @@ export default function Foodpage() {
           <Text style={styles.orderButtonText}>Order</Text>
         </TouchableOpacity>
       </View>
-    </SafeAreaView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    paddingTop:40,
     flex: 1,
     alignItems: 'center',
   },
@@ -189,7 +191,7 @@ const styles = StyleSheet.create({
     marginRight: 5,
   },
   trashButton: {
-    marginLeft: 5,
+    marginRight: 10,
   },
   totalContainer: {
     width: '100%',

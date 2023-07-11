@@ -32,6 +32,7 @@ const Paymentsukses = () => {
 
 const styles = StyleSheet.create({
   container: {
+    paddingTop:40,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center', // Menyatukan tulisan "PAYMENT" ke tengah horizontal

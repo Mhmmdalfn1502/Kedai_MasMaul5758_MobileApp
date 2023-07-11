@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   GagalText: {
     fontSize: 20,
     fontWeight: 'bold',
-    color:'red',
+    color:'red', 
   },
   suksesImage: {
     width: 300,

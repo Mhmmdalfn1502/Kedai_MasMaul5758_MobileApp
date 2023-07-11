@@ -1,37 +1,51 @@
-import React from 'react';
-import { View, StyleSheet, FlatList, Image, Text, TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import { useNavigation } from '@react-navigation/native';
+import React, { useState } from "react";
+import {
+  View,
+  StyleSheet,
+  FlatList,
+  Image,
+  Text,
+  TouchableOpacity,
+} from "react-native";
+import Icon from "react-native-vector-icons/FontAwesome";
+import { useNavigation } from "@react-navigation/native";
 
 const Payment = () => {
   const navigation = useNavigation();
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(
+    "Transfer BCA"
+  );
 
   const handleGoBack = () => {
-    navigation.goBack(); // Navigasi kembali ke halaman sebelumnya (FoodPage)
+    navigation.navigate("Foodpage");
   };
 
   const paymentMethods = [
-    { id: 'qris', logo: require('../assets/qris.png'), text: 'QRIS' },
-    { id: 'cash', logo: require('../assets/cash.png'), text: 'Cash' },
+    { id: "cash", logo: require("../assets/cash.png"), text: "Cash" },
+    { id: "bca", logo: require("../assets/BCA.png"), text: "BANK BCA" },
+    { id: "gopay", logo: require("../assets/Gopay.png"), text: "Gopay" },
+    { id: "ShopeePay",logo: require("../assets/ShopeePay.png"), text: "Shopee Pay",},
   ];
 
   const renderPaymentMethodItem = ({ item }) => {
     const onPressPaymentMethod = () => {
-      if (item.id === 'qris') {
-        // Validasi untuk elemen "QRIS"
-        console.log('QRIS element clicked');
-        // Tambahkan logika atau navigasi khusus untuk elemen "QRIS" di sini
-        navigation.navigate('Paymentqr'); // Navigasi ke halaman "PaymentQr"
-      } else if (item.id === 'cash') {
-        // Validasi untuk elemen "Cash"
-        console.log('Cash element clicked');
-        // Tambahkan logika atau navigasi khusus untuk elemen "Cash" di sini
-        navigation.navigate('Paymentcash'); // Navigasi ke halaman "PaymentCash"
+      setSelectedPaymentMethod(item.text);
+      if (item.id === "cash") {
+        navigation.navigate("Paymentcash");
+      } else if (
+        item.id === "bca" ||
+        item.id === "gopay" ||
+        item.id === "ShopeePay"
+      ) {
+        navigation.navigate("PaymentTf", { paymentMethod: item.text });
       }
     };
 
     return (
-      <TouchableOpacity style={styles.paymentMethodItem} onPress={onPressPaymentMethod}>
+      <TouchableOpacity
+        style={styles.paymentMethodItem}
+        onPress={onPressPaymentMethod}
+      >
         <Image source={item.logo} style={styles.paymentMethodLogo} />
         <Text style={styles.paymentMethodText}>{item.text}</Text>
       </TouchableOpacity>
@@ -44,7 +58,7 @@ const Payment = () => {
         <TouchableOpacity style={styles.back} onPress={handleGoBack}>
           <Icon name="angle-left" size={30} color="#000" />
         </TouchableOpacity>
-        <View style={styles.centerContainer}>
+        <View style={styles.titleContainer}>
           <Text style={styles.title}>PAYMENT</Text>
         </View>
       </View>
@@ -60,24 +74,30 @@ const Payment = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    paddingTop: 40,
+    flexDirection: "row",
+    alignItems: "center",
     paddingHorizontal: 16,
     paddingVertical: 8,
   },
   back: {
-    marginRight: 130,
+    marginRight:1 ,
+  },
+  titleContainer: {
+    flex: 1,
+    alignItems: "center",
   },
   title: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: "bold",
+    textAlign: "center",
   },
   paymentMethodItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     padding: 10,
     borderWidth: 1,
-    borderColor: 'black',
+    borderColor: "black",
   },
   paymentMethodLogo: {
     width: 50,
@@ -86,7 +106,7 @@ const styles = StyleSheet.create({
   },
   paymentMethodText: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
 });
 

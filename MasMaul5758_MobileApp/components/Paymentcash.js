@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
+import { View, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
 
@@ -7,36 +7,16 @@ const Paymentcash = () => {
   const navigation = useNavigation();
   const [paymentAmount, setPaymentAmount] = useState('');
 
+  const handleGoBack = () => {
+    navigation.navigate('Payment');
+  };
+
   const handlePaymentAmountChange = (text) => {
     setPaymentAmount(text);
   };
 
   const handlePayment = () => {
-    // Lakukan logika untuk melakukan pembayaran di sini
-    // Misalnya, mengirimkan permintaan pembayaran ke server atau melakukan tindakan lainnya
-    console.log('Pembayaran sebesar', paymentAmount, 'telah dilakukan.');
-
-    // Navigasi ke halaman "PaymentSukses"
     navigation.navigate('Paymentsukses');
-  };
-
-  const handleGoBack = () => {
-    // Tampilkan konfirmasi sebelum kembali ke halaman sebelumnya
-    Alert.alert(
-      'Konfirmasi',
-      'Apakah Anda yakin ingin kembali? Semua data yang telah diisi akan hilang.',
-      [
-        {
-          text: 'Batal',
-          style: 'cancel',
-        },
-        {
-          text: 'Ya',
-          onPress: () => navigation.goBack(), // Kembali ke halaman sebelumnya jika ditekan "Ya"
-        },
-      ],
-      { cancelable: false }
-    );
   };
 
   return (
@@ -77,6 +57,7 @@ const Paymentcash = () => {
 
 const styles = StyleSheet.create({
   container: {
+    paddingTop:40,
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 16,
@@ -143,8 +124,6 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginTop: 20,
     alignItems: 'center',
-    position: 'relative',
-    bottom: '0',
     width: 100,
   },
   buttonText: {
